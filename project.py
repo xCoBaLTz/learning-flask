@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, request, redirect, flash
+from flask import Flask, render_template, url_for, request, redirect, flash, jsonify
 app = Flask(__name__)
 
 from restaurant_setup import Base, Restaurant, MenuItem
@@ -55,6 +55,20 @@ def deleteMenuItem(restaurant_id, menu_id):
         return redirect(url_for('restaurantMenu', restaurant_id = restaurant_id))
     else:
         return render_template('deletemenuitem.html', restaurant_id = restaurant_id, menu_id = menu_id, item = itemQuery)
+
+
+#Making an API Endpoint (GET Request)
+@app.route('/restaurants/<int:restaurant_id>/menu/JSON')
+def restaurantMenuJSON(restaurant_id):
+    restaurant = session.query(Restaurant).filter_by(id = restaurant_id).one()
+    items = session.query(MenuItem).filter_by(restaurant_id = restaurant_id)
+    return jsonify(MenuItems=[i.serialize for i in items])
+
+@app.route('/restaurants/<int:restaurant_id>/menu/<int:menu_id>/JSON')
+def menuItemJSON(restaurant_id, menu_id):
+    items = session.query(MenuItem).filter_by(restaurant_id = restaurant_id, id = menu_id)
+    return jsonify(MenuItems=[i.serialize for i in items])
+
 
 if __name__ == '__main__':
     app.secret_key = "super_secret_key"
