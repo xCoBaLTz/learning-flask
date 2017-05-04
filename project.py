@@ -101,6 +101,11 @@ def deleteMenuItem(restaurant_id, menu_id):
 
 
 #Making an API Endpoint (GET Request)
+@app.route('/restaurants/JSON')
+def restaurantJSON():
+    restaurant = session.query(Restaurant)
+    return jsonify(Restaurant=[i.serialize for i in restaurant])
+
 @app.route('/restaurants/<int:restaurant_id>/menu/JSON')
 def restaurantMenuJSON(restaurant_id):
     restaurant = session.query(Restaurant).filter_by(id = restaurant_id).one()
