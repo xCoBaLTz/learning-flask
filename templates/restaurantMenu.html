@@ -1,19 +1,26 @@
 <html>
 <body>
-<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles.css')}}">
 <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='bootstrap.min.css')}}">
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles.css')}}">
 <div class="container">
   <div class="row">
-    <div class="col-md-4"></div>
-    <div class="col-md-4">
-      <h1>List of Restaurants</h1>
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+      <h1 class="center">List of Restaurants</h1>
       <h2 class="center">
         <a href="{{url_for('newRestaurant')}}">Make a new Restaurant</a>
       </h2>
+      {% with messages = get_flashed_messages() %}
+			{% if messages %}
+				{% for message in messages %}
+					{{ message }}
+				{% endfor %}
+			{% endif %}
+			{% endwith %}
       </br>
           {% for res in restaurant %}
           <div>
-            <h2>{{res.name}}</h2>
+            <h2><a style="color:black; text-decoration:none;" href="{{url_for('restaurantItemMenu', restaurant_id = res.id)}}">{{res.name}}</h2>
             <a href="{{url_for('editRestaurant', restaurant_id = res.id)}}">Edit</a>
             <a href="{{url_for('deleteRestaurant', restaurant_id = res.id)}}">Delete</a>
           </div>
