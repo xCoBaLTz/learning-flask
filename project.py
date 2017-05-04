@@ -11,17 +11,23 @@ DBSession = sessionmaker(bind = engine)
 session = DBSession()
 
 @app.route('/')
-#@app.route('/restaurants')
+@app.route('/restaurants')
+def restaurantsMenu():
+    restaurant = session.query(Restaurant)
+    return render_template('restaurantsMenu.html', restaurant = restaurant)
 
-#@app.route('/restaurants/new')
+@app.route('/restaurants/new')
+def newRestaurant():
 
-#@app.route('/restaurants/<int:restaurant_id>/edit')
+@app.route('/restaurants/<int:restaurant_id>/edit')
+def editRestaurant(restaurant_id):
 
-#@app.route('/restaurants/<int:restaurant_id>/delete')
+@app.route('/restaurants/<int:restaurant_id>/delete')
+def deleteRestaurant(restaurant_id):
 
-#@app.route('/restaurants/<int:restaurant_id>/menu')
+@app.route('/restaurants/<int:restaurant_id>/menu')
 @app.route('/restaurants/<int:restaurant_id>/')
-def restaurantMenu(restaurant_id):
+def restaurantItemMenu(restaurant_id):
     restaurant = session.query(Restaurant).filter_by(id = restaurant_id).one()
     items = session.query(MenuItem).filter_by(restaurant_id = restaurant_id)
     return render_template('menu.html', restaurant = restaurant, items = items)
