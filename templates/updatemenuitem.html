@@ -1,5 +1,7 @@
 <html>
 <body>
+  <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='bootstrap.min.css')}}">
+  <div class="container">
   <h1>Update Menu Item</h1>
   <form method='POST' action="{{url_for('editMenuItem', restaurant_id=restaurant_id, menu_id=menu_id)}}">
     Name:
@@ -7,5 +9,6 @@
     <input type="submit" value="Create">
     <a href="{{url_for('restaurantMenu', restaurant_id=restaurant_id)}}">Cancel</a>
   </form>
-  </body>
-  </html>
+  </div>
+</body>
+</html>

@@ -1,11 +1,12 @@
 <html>
 <body>
-	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='bootstrap.min.css')}}">
 	<div class="container">
 		<div class="row">
-		<div class="col-md-6 col-offset-md-3">
-			<h1>{{ restaurant.name }}</h1>
+			<div class="col-md-4"></div>
+			<div class="col-md-4">
+			<h1 class="center">{{ restaurant.name }}</h1>
 
 			{% with messages = get_flashed_messages() %}
 			{% if messages %}
@@ -15,7 +16,7 @@
 			{% endif %}
 			{% endwith %}
 
-			<h3><a href="{{url_for('newMenuItem', restaurant_id = restaurant.id)}}">Add New Menu Item</a></h3>
+			<h4 class="center"><a href="{{url_for('newMenuItem', restaurant_id = restaurant.id)}}">Add New Menu Item</a></h4>
 			{% for i in items %}
 				<div class = "item">
 					<div class = "name-price">{{i.name}} - {{i.price}}</div>
@@ -26,6 +27,8 @@
 					<br>
 				</div>
 			{% endfor %}
+		</div>
+		<div class="col-md-4"></div>
 		</div>
 		</div>
 	</div>

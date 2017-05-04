@@ -1,10 +1,13 @@
 <html>
   <body>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='bootstrap.min.css')}}">
+    <div class="container">
     <h1>Make a Menu Item</h1>
     <form method='POST' action="{{url_for('newMenuItem', restaurant_id=restaurant_id)}}">
       Name:
       <input name="name" type="text" placeholder="New Menu Item Name">
       <input type="submit" value="Create">
     </form>
+  </div>
   </body>
 </html>
